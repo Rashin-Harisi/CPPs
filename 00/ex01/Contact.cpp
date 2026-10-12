@@ -1,5 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabdolho <rabdolho@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/12 09:29:39 by rabdolho          #+#    #+#             */
+/*   Updated: 2026/10/12 09:29:47 by rabdolho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "Contact.hpp"
-
 
 void Contact::setFirstName(std::string name){firstName = name;}
 void Contact::setLastName(std::string name){lastName = name;}
@@ -15,10 +25,10 @@ std::string Contact::getDarkSecret()const {return darkSecret;}
 
 void Contact::show()
 {
-    std::cout << "Information\n";
-    std::cout << "First Name: " << firstName << std::endl;
-    std::cout << "Last Name: " << lastName << std::endl;
-    std::cout << "Nickname: " << nickName << std::endl;
-    std::cout << "Phone Number: " << phoneNumber << std::endl;
-    std::cout << "Darkest Secret: " << darkSecret <<std::endl;
+	std::cout << "Information\n";
+	std::cout << "First Name: " << firstName << std::endl;
+	std::cout << "Last Name: " << lastName << std::endl;
+	std::cout << "Nickname: " << nickName << std::endl;
+	std::cout << "Phone Number: " << phoneNumber << std::endl;
+	std::cout << "Darkest Secret: " << darkSecret <<std::endl;
 }
