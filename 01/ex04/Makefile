@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(MANDATORY_OBJ)
 	@$(CXX) $(CXXFLAGS) $(MANDATORY_OBJ) -o $(NAME)
-	@printf "$(GREEN)Mandatory part is built.$(RESET)\n"
+	@printf "$(GREEN)Program is built.$(RESET)\n"
 
 %.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
