@@ -6,7 +6,7 @@
 /*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 14:23:32 by rabdolho          #+#    #+#             */
-/*   Updated: 2026/10/14 14:23:33 by rabdolho         ###   ########.fr       */
+/*   Updated: 2026/10/19 09:53:05 by rabdolho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main(void)
 {
-    int N = 0;
+    int N = 10;
     Zombie *zombies = zombieHorde(N, "Zombie");
     if (zombies == NULL)
     {

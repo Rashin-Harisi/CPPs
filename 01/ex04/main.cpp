@@ -6,18 +6,17 @@
 /*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 10:09:36 by rabdolho          #+#    #+#             */
-/*   Updated: 2026/10/12 14:38:21 by rabdolho         ###   ########.fr       */
+/*   Updated: 2026/10/19 11:50:06 by rabdolho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream>
 
 std::string replace(std::string s1, std::string s2 , std::string line)
 {
-    if (s1 == "") return (line);
+    if (s1.empty()) return (line);
     std::string::size_type indexFound;
     std::string::size_type position = 0;
     while((indexFound = line.find(s1, position)) != std::string::npos )
@@ -38,6 +37,7 @@ int main(int argc, char **argv)
     std::string s1 = argv[2];
     std::string s2 = argv[3];
     std::string fileName = argv[1];
+    char c;
     std::string line;
     std::string newLine;
 
@@ -47,34 +47,40 @@ int main(int argc, char **argv)
         std::cout << "Somthing went wrong in opening the file" << std::endl;
         return (1);
     }
-    std::ofstream outputFile;
+    while (inputFile.get(c))
+    {
+        line += c;
+    }
+    if (inputFile.bad() || (inputFile.fail() && !inputFile.eof())) 
+    {
+        std::cout << "Somthing went wrong in reading content" << std::endl;
+        return (1);
+    }
+    inputFile.clear();
+    inputFile.close();
+    if (inputFile.fail())
+    {
+        std::cout << "Somthing went wrong in closing input file" << std::endl;
+        return (1);
+    }
+    newLine = replace(s1, s2, line);
     std::string replaceFileName = fileName + ".replace";
-    outputFile.open(replaceFileName.c_str());
+    std::ofstream outputFile(replaceFileName.c_str());
     if (!outputFile.is_open())
     {
         std::cout << "Somthing went wrong in creating a replacement file" << std::endl;
         return (1);
     }
-    std::ostringstream streamContent;
-    streamContent << inputFile.rdbuf();
-    if (streamContent.bad() || (streamContent.fail() && !streamContent.eof()))
-    {
-        std::cout << "Error reading from the file." << std::endl;
-        return (1);
-    }
-    line = streamContent.str();
-    newLine = replace(s1, s2, line);
     outputFile << newLine;
     if (!outputFile)
     {
-        std::cout << "Error writing the content to the replace file." << std::endl;
+        std::cout << "Somthing went wrong in writing in the replacement file" << std::endl;
         return (1);
     }
-    inputFile.close();
     outputFile.close();
-    if (outputFile.fail() || inputFile.fail())
+    if (outputFile.fail())
     {
-        std::cout << "Error closing files." << std::endl;
+        std::cout << "Error closing the replacement file" << std::endl;
         return (1);
     }
     return (0);

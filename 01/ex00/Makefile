@@ -14,7 +14,7 @@ MANDATORY_SRC = main.cpp \
 MANDATORY_OBJ = $(MANDATORY_SRC:.cpp=.o)
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
 all: $(NAME)
 
