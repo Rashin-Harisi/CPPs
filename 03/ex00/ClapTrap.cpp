@@ -1,11 +1,22 @@
-#include "ClapTrap.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/08 16:49:35 by rabdolho          #+#    #+#             */
+/*   Updated: 2026/11/08 16:49:36 by rabdolho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(std::string name)
 {
     _name = name;
     hitPoints = 10;
-    enegryPoints = 10;
+    energyPoints = 10;
     attackDamage = 0;
     std::cout << "Constructor is called" << std::endl;
 }
@@ -22,7 +33,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
     {
         this->hitPoints = other.hitPoints;
         this->attackDamage = other.attackDamage;
-        this->enegryPoints = other.enegryPoints;
+        this->energyPoints = other.energyPoints;
         this->_name = other._name;
     }
     std::cout << "Copy assignment is called" << std::endl;
@@ -34,20 +45,20 @@ ClapTrap::~ClapTrap()
     std::cout << "Destructor is called" << std::endl;
 }
 
-void ClapTrap::attack(const std::string& target)
+void ClapTrap::attack(const std::string &target)
 {
-    if (enegryPoints == 0 || hitPoints == 0)
+    if (energyPoints == 0 || hitPoints == 0)
     {
         std::cout << "No Energy or No HealthPoint" << std::endl;
         return;
     }
-    enegryPoints--;
+    energyPoints--;
     std::cout << "ClapTrap " << _name << " attacks " << target << " , causing " << attackDamage << " points of damage !" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (amount >= hitPoints )
+    if (amount >= hitPoints)
     {
         hitPoints = 0;
         std::cout << amount << " is more than health points! No survival!" << std::endl;
@@ -61,12 +72,12 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (enegryPoints == 0 || hitPoints == 0)
+    if (energyPoints == 0 || hitPoints == 0)
     {
         std::cout << "No Energy or No HealthPoint" << std::endl;
         return;
     }
     hitPoints += amount;
-    enegryPoints--;
+    energyPoints--;
     std::cout << amount << " of points repaired." << std::endl;
 }

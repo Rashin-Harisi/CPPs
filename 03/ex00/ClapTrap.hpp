@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/08 16:49:48 by rabdolho          #+#    #+#             */
+/*   Updated: 2026/11/08 16:49:49 by rabdolho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
@@ -12,15 +24,15 @@ public:
     ClapTrap(const ClapTrap &other);
     ClapTrap &operator=(const ClapTrap &other);
     ~ClapTrap();
-    void attack(const std::string& target);
+    void attack(const std::string &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 
 private:
     std::string _name;
-    unsigned int hitPoints; //the Health of the ClapTrap
-    unsigned int enegryPoints; 
+    unsigned int hitPoints; // the Health of the ClapTrap
+    unsigned int energyPoints;
     unsigned int attackDamage;
 };
 
-#endif // CLAPTRAP_HPP 
+#endif // CLAPTRAP_HPP
