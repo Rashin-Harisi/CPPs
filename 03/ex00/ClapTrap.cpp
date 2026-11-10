@@ -6,7 +6,7 @@
 /*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/08 16:49:35 by rabdolho          #+#    #+#             */
-/*   Updated: 2026/11/08 16:49:36 by rabdolho         ###   ########.fr       */
+/*   Updated: 2026/11/10 13:16:09 by rabdolho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     if (amount >= hitPoints)
     {
         hitPoints = 0;
-        std::cout << amount << " is more than health points! No survival!" << std::endl;
+        std::cout << amount << " is more than or equal to  health points! No survival!" << std::endl;
     }
     else
     {

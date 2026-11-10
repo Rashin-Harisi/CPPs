@@ -6,7 +6,7 @@
 /*   By: rabdolho <rabdolho@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/08 16:50:05 by rabdolho          #+#    #+#             */
-/*   Updated: 2026/11/08 16:50:06 by rabdolho         ###   ########.fr       */
+/*   Updated: 2026/11/10 13:16:09 by rabdolho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ ClapTrap::ClapTrap(std::string name)
     hitPoints = 10;
     energyPoints = 10;
     attackDamage = 0;
-        std::cout << "Constructor from ClapTrap is called." << std::endl;
-
+    std::cout << "Constructor from ClapTrap is called." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
@@ -43,7 +42,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "Destructor from CalpTrap is called." << std::endl;
+    std::cout << "Destructor from ClapTrap is called." << std::endl;
 }
 
 void ClapTrap::attack(const std::string &target)
@@ -62,7 +61,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     if (amount >= hitPoints)
     {
         hitPoints = 0;
-        std::cout << amount << " is more than health points! No survival!" << std::endl;
+        std::cout << amount << " is more than or equal to  health points! No survival!" << std::endl;
     }
     else
     {
