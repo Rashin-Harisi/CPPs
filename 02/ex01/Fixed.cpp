@@ -3,20 +3,23 @@
 Fixed::Fixed(const int n)
 {
     int raw;
-    raw = n * ( 1 << fracctionalBits); // 1 << 8 = 2^8= 256
+    if ((n > INT_MAX / (1 << fracctionalBits)) || 
+        (n < INT_MIN / (1 << fracctionalBits)))
+        throw std::overflow_error("Integer construction overflow!");
+    raw = n * (1 << fracctionalBits); // 1 << 8 = 2^8= 256
     setRawBits(raw);
     std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float f)
 {
-    int raw;
-    if (f >= 0)
-        raw = f * (1 << fracctionalBits) + 0.5f;
-    else
-        raw = f * (1 << fracctionalBits) - 0.5f;
-    setRawBits(raw);
-    std::cout << "Float constructor called" << std::endl;
+    double raw;
+    raw = static_cast<double>(f) * (1 <<fracctionalBits);
+    if (! (raw >= static_cast<double>(INT_MIN) && 
+        raw <= static_cast<double>(INT_MAX)))
+        throw std::overflow_error("Float constructor overflow!");
+    float rounded = roundf(static_cast<float>(raw));
+    setRawBits(static_cast<int>(rounded));
 }
 
 Fixed::Fixed()
@@ -43,12 +46,12 @@ Fixed &Fixed::operator=(const Fixed &other)
 
 Fixed::~Fixed()
 {
-     std::cout << "Destructor called" << std::endl;
+    std::cout << "Destructor called" << std::endl;
 }
 
-int Fixed::getRawBits()const
+int Fixed::getRawBits() const
 {
-    //std::cout << "getRawBits member function called" << std::endl;
+    // std::cout << "getRawBits member function called" << std::endl;
     return (value);
 }
 
@@ -57,14 +60,14 @@ void Fixed::setRawBits(int const raw)
     value = raw;
 }
 
-float Fixed::toFloat()const
+float Fixed::toFloat() const
 {
     int raw;
     raw = getRawBits();
     return (static_cast<float>(raw) / (1 << fracctionalBits));
 }
 
-int Fixed::toInt()const
+int Fixed::toInt() const
 {
     int raw;
     raw = getRawBits();

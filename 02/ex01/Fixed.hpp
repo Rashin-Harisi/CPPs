@@ -3,6 +3,9 @@
 #define FIXED_HPP
 
 #include <iostream>
+#include <climits>
+#include <stdexcept>
+#include <cmath>
 
 class Fixed
 {
@@ -12,13 +15,14 @@ public:
     Fixed();
     Fixed(const Fixed &other);
     Fixed &operator=(const Fixed &other);
-    int getRawBits()const;
+    int getRawBits() const;
     void setRawBits(int const raw);
-    float toFloat()const;
-    int toInt()const;
+    float toFloat() const;
+    int toInt() const;
     ~Fixed();
+
 private:
-    static const int fracctionalBits = 8; //the number of fractional bits
+    static const int fracctionalBits = 8; // the number of fractional bits
     int value;
 };
 

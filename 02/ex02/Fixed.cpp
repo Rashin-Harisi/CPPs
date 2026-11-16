@@ -3,20 +3,22 @@
 Fixed::Fixed(const int n)
 {
     int raw;
+    if ((n > INT_MAX / (1 << fracctionalBits)) || 
+        (n < INT_MIN / (1 << fracctionalBits)))
+        throw std::overflow_error("Integer construction overflow!");
     raw = n * ( 1 << fracctionalBits); // 1 << 8 = 2^8= 256
     setRawBits(raw);
-    //std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float f)
 {
-    int raw;
-    if (f >= 0)
-        raw = f * (1 << fracctionalBits) + 0.5f;
-    else
-        raw = f * (1 << fracctionalBits) - 0.5f;
-    setRawBits(raw);
-    //std::cout << "Float constructor called" << std::endl;
+    double raw;
+    raw = static_cast<double>(f) * (1 <<fracctionalBits);
+    if (! (raw >= static_cast<double>(INT_MIN) && 
+        raw <= static_cast<double>(INT_MAX)))
+        throw std::overflow_error("Float constructor overflow!");
+    float rounded = roundf(static_cast<float>(raw));
+    setRawBits(static_cast<int>(rounded));
 }
 
 Fixed::Fixed()
@@ -112,14 +114,14 @@ Fixed Fixed::operator * (const Fixed &other)const
 {
     Fixed result;
     double raw = (static_cast<double>(value) * other.value) / (1 << fracctionalBits);
-    if (INT_MIN > raw || raw > INT_MAX)
-    {
-        throw std::overflow_error("Multiplication result overflowed!");
-    }
     if (raw >= 0)
         raw += 0.5f;
     else
         raw -= 0.5f;
+    if (INT_MIN > raw || raw > INT_MAX)
+    {
+        throw std::overflow_error("Multiplication result overflowed!");
+    }
     result.setRawBits(static_cast<int>(raw));
     return (result);
 }
@@ -129,14 +131,14 @@ Fixed Fixed::operator / (const Fixed &other)const
     Fixed result;
     if (other.value == 0) throw std::domain_error("Division by zero");
     double raw = (static_cast<double>(value) * (1 << fracctionalBits)) / other.value;
-    if (INT_MIN > raw || raw > INT_MAX)
-    {
-        throw std::overflow_error("Division result overflowed!");
-    }
     if (raw >= 0)
         raw += 0.5f;
     else
         raw -= 0.5f;
+    if (INT_MIN > raw || raw > INT_MAX)
+    {
+        throw std::overflow_error("Division result overflowed!");
+    }
     result.setRawBits(static_cast<int>(raw));
     return (result);
 }

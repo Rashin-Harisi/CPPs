@@ -5,6 +5,7 @@
 #include <iostream>
 #include <climits>
 #include <stdexcept>
+#include <cmath>
 
 class Fixed
 {
